@@ -1,8 +1,22 @@
+(function(window, undefined) {
+  function Nuj() {
+    this.extend = function(base, add) {
+      if (base == undefined) return add;
+      for (k in add) {
+        base[k] = add[k];
+      }
+      return base;
+    };
+  }
+
+  window.Nuj = window.Nuj || new Nuj();
+})(window);
+
 (function() {
   var initFormValidation = function(el, options) {
-    options = $.extend({validateOnBlur: true}, options);
+    options = Nuj.extend({validateOnBlur: true}, options);
     if (options.validators) {
-      $.extend(validators, options.validators); 
+      Nuj.extend(validators, options.validators);
     }
 
     $(el).find('input').each(function() {
