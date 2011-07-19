@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SmallForm example</title>
+  <script src="jquery.js"></script>
+  <script src="smallform.js"></script>
+  <script>
+    $(document).ready(function() {
+      var form = document.getElementsByTagName('form')[0];
+      var options = {
+        validateOnKeyUp: false,
+        validators: {
+          age: function(val) {
+            return parseInt(val) >= 13 && parseInt(val) < 150;
+          }
+        },
+        messages: {
+          age: "Please enter a number between 13 and 150"
+        }
+      };
+      initFormValidation(form, options);
+    });
+  </script>
+  <style>
+    label {
+      font-weight: bold;
+    }
+
+    label, input {
+      display: block;
+    }
+
+    input {
+      margin-bottom: 16px;
+    }
+
+    ol {
+      list-style-type: none; 
+    }
+
+    .error {
+      border: 2px solid red;
+    }
+
+    .valid {
+      background-color: #99EE77;
+    }
+  </style>
+</head>
+
+<body>
+  <form>
+    <ol>
+      <li>
+        <label for="name">Name</label>
+        <input type="text" id="name" data-validate="notEmpty" />
+      </li>
+      <li>
+        <label for="email">Email</label>
+        <input type="text" id="email" data-validate="email, notEmpty" />
+      </li>
+      <li>
+        <label for="age">Age</label>
+        <input type="text" id="age" data-validate="age" />
+      </li>
+      <li>
+        <input type="submit" />
+      </li>
+    </ol>
+  </form>
+</body>
