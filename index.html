@@ -8,6 +8,7 @@
     $(document).ready(function() {
       var form = document.getElementsByTagName('form')[0];
       var options = {
+        onError: function(errors) { console.log("el: " + this); console.log(errors); },
         validateOnKeyUp: false,
         validators: {
           age: function(val) {
