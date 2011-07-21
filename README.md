@@ -1,7 +1,7 @@
 #About
 **TinyValidation** is a jQuery plugin for simple form validation. It validates fields using built-in validators (`'notEmpty'`, `'email'`) or custom validation functions. You specify which form elements to validate through a `'data-validate'` HTML attribute, which is common-separated list of validators to run for that element.
 
-#Example
+##Example
 
 Example markup:
 
@@ -17,7 +17,7 @@ Example JavaScript:
     $('#form1').tinyValidation({validateOnKeyUp: true});
 
 
-#Options
+##Options
 The following options can be passed to `'tinyValidation'` in an optional hash:
 
   * `'validateOnBlur'`. Determines whether validations are run on blur events. Default: `'true'`.
@@ -28,5 +28,5 @@ The following options can be passed to `'tinyValidation'` in an optional hash:
   * `'onValid'`. Function called after a field has been validated successfully. The function will be passed the form element that was validated.
   * `'validators'`. A hash in which the keys are the names of validation functions, and the values are functions that accept an input value and return true if the validation succeeds, and false (or an error message) if the validation fails.
 
-#License
+##License
 TinyValidation is released under a 3-clause BSD license.
