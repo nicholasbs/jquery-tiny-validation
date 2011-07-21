@@ -1,5 +1,5 @@
 (function($) {
-  $.fn.simpleValidation = function(options) {
+  $.fn.tinyValidation = function(options) {
     var defaultOptions = {
       validateOnBlur: true,
       validateOnKeyUp: false,
@@ -53,4 +53,3 @@
     return this;
   };
 })(jQuery);
-

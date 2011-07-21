@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SmallForm example</title>
+  <title>TinyValidation example</title>
   <script src="jquery.js"></script>
-  <script src="simplevalidation.js"></script>
+  <script src="tinyvalidation.js"></script>
   <script>
     $(document).ready(function() {
       var options = {
@@ -13,7 +13,7 @@
           age: function(val) { return parseInt(val) >= 13 && parseInt(val) < 150 ? true : "ZOMG bad age"; }
         }
       };
-      $('form').simpleValidation(options);
+      $('form').tinyValidation(options);
     });
   </script>
   <style>
