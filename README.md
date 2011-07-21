@@ -32,6 +32,8 @@ The following options can be passed to `tinyValidation` in an optional hash:
 
 ##Custom validation functions
 
+In addition to the `notEmpty` and `email` validation functions provided by default, you can define your own. The following example checks if a field follows the standard format for a US zip code (e.g., 12345 or 12345-1234).
+
     $('#form1').tinyValidation({
       validators: {
         zipCode: function(zip) {
@@ -39,7 +41,7 @@ The following options can be passed to `tinyValidation` in an optional hash:
           return re.test(zip) ? true : "Invalid zip code (ex. 12345 or 12345-1234)";
     }}});
 
-This function will be called for any input fields with `data-validate="zipCode"`.
+This function will be called for any input fields with `zipCode` in its `data-validate` HTML attribute.
 
 ##License
 
