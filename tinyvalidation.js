@@ -19,7 +19,7 @@
     };
     options = $.extend(true, defaultOptions, options);
 
-    this.find('input').each(function() {
+    this.find('input, textarea').each(function() {
       if (!$(this).attr('data-validate')) return;
 
       var validations = $(this).attr('data-validate').replace(/\s/g, '').split(',');
