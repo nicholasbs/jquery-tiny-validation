@@ -7,10 +7,15 @@
   <script>
     $(document).ready(function() {
       var options = {
-        onError: function(errors) { console.log("el: " + this); console.log(errors); },
-        validateOnKeyUp: false,
+        onError: function(errors) {
+          console.log("el: " + this);
+          console.log(errors);
+        },
         validators: {
-          age: function(val) { return parseInt(val) >= 13 && parseInt(val) < 150 ? true : "ZOMG bad age"; }
+          zipCode: function(zip) {
+            var re = /^\d\d\d\d\d(-?\d\d\d\d)?$/;
+            return re.test(zip) ? true : "Invalid zip code (ex. 12345 or 12345-1234)";
+          }
         }
       };
       $('form').tinyValidation(options);
@@ -59,8 +64,8 @@
         <textarea id="bio" data-validate="notEmpty"></textarea>
       </li>
       <li>
-        <label for="age">Age</label>
-        <input type="text" id="age" data-validate="age" />
+        <label for="zip">Zip</label>
+        <input type="text" id="zip" data-validate="zipCode" />
       </li>
       <li>
         <input type="submit" />

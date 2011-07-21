@@ -28,5 +28,16 @@ The following options can be passed to `'tinyValidation'` in an optional hash:
   * `'onValid'`. Function called after a field has been validated successfully. The function will be passed the form element that was validated.
   * `'validators'`. A hash in which the keys are the names of validation functions, and the values are functions that accept an input value and return true if the validation succeeds, and false (or an error message) if the validation fails.
 
+##Custom validation functions
+
+    $('#form1').tinyValidation({
+      validators: {
+        zipCode: function(zip) {
+          var re = /^\d\d\d\d\d(-?\d\d\d\d)?$/;
+          return re.test(zip) ? true : "Invalid zip code (ex. 12345 or 12345-1234)";
+    }}});
+
+This function will be called for any input fields with `'data-validate="zipCode"'`.
+
 ##License
 TinyValidation is released under a 3-clause BSD license.
