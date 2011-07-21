@@ -22,6 +22,7 @@ Example JavaScript:
 
 The following options can be passed to `tinyValidation` in an optional hash:
 
+  * `disableSubmit`. Disables all submit buttons unless every field with validations has been marked as valid. Default: `true`
   * `validateOnBlur`. Determines whether validations are run on blur events. Default: `true`.
   * `validateOnKeyUp`. Determines whether validations are run on keyUp events. Default: `false`.
   * `errorClass`. The name of the class added to form elements with invalid values. Default: `error`.
