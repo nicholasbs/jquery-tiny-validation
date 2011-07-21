@@ -1,6 +1,7 @@
 (function($) {
   $.fn.tinyValidation = function(options) {
     var defaultOptions = {
+      disableSubmit: true,
       validateOnBlur: true,
       validateOnKeyUp: false,
       errorClass: 'error', // added to inputs with errors
@@ -19,9 +20,12 @@
     };
     options = $.extend(true, defaultOptions, options);
 
-    this.find('input, textarea').each(function() {
+    var $form = this,
+        numValidatedFields = 0;
+    if (options.disableSubmit) $form.find(':submit').attr('disabled', 'true');
+    $form.find('input, textarea').each(function() {
       if (!$(this).attr('data-validate')) return;
-
+      numValidatedFields++;
       var validations = $(this).attr('data-validate').replace(/\s/g, '').split(',');
 
       var validateField = function() {
@@ -43,6 +47,14 @@
           $(this).addClass(options.validClass);
           $(this).removeClass(options.errorClass);
           if (typeof options.onValid === 'function') options.onValid.call(this);
+        }
+
+        if (options.disableSubmit) {
+          if ($form.find("." + options.validClass).length == numValidatedFields) {
+            $form.find(':submit').removeAttr('disabled');
+          } else {
+            $form.find(':submit').attr('disabled', 'true');
+          }
         }
       }
 
