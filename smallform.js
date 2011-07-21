@@ -1,37 +1,29 @@
-(function() {
+(function($) {
   var defaultOptions = {
     validateOnBlur: true,
     validateOnKeyUp: false,
     errorClass: 'error', // added to inputs with errors
     validClass: 'valid', // added to valid inputs
     onValid: null, // function called when field is valid
-    onError: null // function called when field has error
-  };
-
-  // Default validators
-  var validators = {
-    email: function(email) {
-      var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return email.match(re);
+    onError: null, // function called when field has error
+    validators: {
+      email: function(email) {
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return email.match(re);
+      },
+      notEmpty: function(val) {
+        return val != "";
+      }
     },
-    notEmpty: function(val) {
-      return val != "";
+    messages: {
+      email: "Please enter a valid email",
+      notEmpty: "This field is required"
     }
   };
 
-  var messages = {
-    email: "Please enter a valid email",
-    notEmpty: "This field is required"
-  };
-
-
-  var initFormValidation = function(el, options) {
-    options = $.extend(defaultOptions, options);
-    if (options.validators) {
-      $.extend(validators, options.validators);
-    }
-
-    $(el).find('input').each(function() {
+  $.fn.simpleValidation = function(options) {
+    options = $.extend(true, defaultOptions, options);
+    this.find('input').each(function() {
       if (!$(this).attr('data-validate')) return;
 
       var validations = $(this).attr('data-validate').replace(/\s/g, '').split(',');
@@ -41,8 +33,8 @@
         var errors = [];
         for (var i=0; i < validations.length; i++) {
           var validation = validations[i];
-          if (!validators[validation](val)) {
-            errors.push(messages[validation]);
+          if (!options.validators[validation](val)) {
+            errors.push(options.messages[validation]);
           }
         }
 
@@ -62,8 +54,8 @@
       if (options.validateOnKeyUp)
         $(this).keyup(validateField);
     });
-  };
 
-  window.initFormValidation = window.initFormValidation || initFormValidation; 
-})();
+    return this;
+  };
+})(jQuery);
 

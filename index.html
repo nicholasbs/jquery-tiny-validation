@@ -6,7 +6,6 @@
   <script src="smallform.js"></script>
   <script>
     $(document).ready(function() {
-      var form = document.getElementsByTagName('form')[0];
       var options = {
         onError: function(errors) { console.log("el: " + this); console.log(errors); },
         validateOnKeyUp: false,
@@ -19,7 +18,7 @@
           age: "Please enter a number between 13 and 150"
         }
       };
-      initFormValidation(form, options);
+      $('form').simpleValidation(options);
     });
   </script>
   <style>
