@@ -8,11 +8,9 @@
     $(document).ready(function() {
       var options = {
         onError: function(errors) { console.log("el: " + this); console.log(errors); },
-        validateOnKeyUp: false,
+        validateOnKeyUp: true,
         validators: {
-          age: function(val) {
-            return parseInt(val) >= 13 && parseInt(val) < 150;
-          }
+          age: function(val) { return parseInt(val) >= 13 && parseInt(val) < 150; }
         },
         messages: {
           age: "Please enter a number between 13 and 150"

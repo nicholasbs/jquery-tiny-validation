@@ -1,28 +1,28 @@
 (function($) {
-  var defaultOptions = {
-    validateOnBlur: true,
-    validateOnKeyUp: false,
-    errorClass: 'error', // added to inputs with errors
-    validClass: 'valid', // added to valid inputs
-    onValid: null, // function called when field is valid
-    onError: null, // function called when field has error
-    validators: {
-      email: function(email) {
-        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return email.match(re);
-      },
-      notEmpty: function(val) {
-        return val != "";
-      }
-    },
-    messages: {
-      email: "Please enter a valid email",
-      notEmpty: "This field is required"
-    }
-  };
-
   $.fn.simpleValidation = function(options) {
+    var defaultOptions = {
+      validateOnBlur: true,
+      validateOnKeyUp: false,
+      errorClass: 'error', // added to inputs with errors
+      validClass: 'valid', // added to valid inputs
+      onValid: null, // function called when field is valid
+      onError: null, // function called when field has error
+      validators: {
+        email: function(email) {
+          var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          return email.match(re);
+        },
+        notEmpty: function(val) {
+          return val != "";
+        }
+      },
+      messages: {
+        email: "Please enter a valid email",
+        notEmpty: "This field is required"
+      }
+    };
     options = $.extend(true, defaultOptions, options);
+
     this.find('input').each(function() {
       if (!$(this).attr('data-validate')) return;
 
