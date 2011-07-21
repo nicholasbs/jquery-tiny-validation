@@ -10,15 +10,11 @@
       validators: {
         email: function(email) {
           var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-          return email.match(re);
+          return email.match(re) ? true : "Please enter a valid email";
         },
         notEmpty: function(val) {
-          return val != "";
+          return val != "" ? true : "This field is required";
         }
-      },
-      messages: {
-        email: "Please enter a valid email",
-        notEmpty: "This field is required"
       }
     };
     options = $.extend(true, defaultOptions, options);
@@ -33,8 +29,9 @@
         var errors = [];
         for (var i=0; i < validations.length; i++) {
           var validation = validations[i];
-          if (!options.validators[validation](val)) {
-            errors.push(options.messages[validation]);
+          var res = options.validators[validation](val);
+          if (res == false || typeof res === 'string') { // Error or error message returned
+            errors.push(res || "This field has an error");
           }
         }
 

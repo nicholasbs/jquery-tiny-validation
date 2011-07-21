@@ -3,17 +3,14 @@
 <head>
   <title>SmallForm example</title>
   <script src="jquery.js"></script>
-  <script src="smallform.js"></script>
+  <script src="simplevalidation.js"></script>
   <script>
     $(document).ready(function() {
       var options = {
         onError: function(errors) { console.log("el: " + this); console.log(errors); },
-        validateOnKeyUp: true,
+        validateOnKeyUp: false,
         validators: {
-          age: function(val) { return parseInt(val) >= 13 && parseInt(val) < 150; }
-        },
-        messages: {
-          age: "Please enter a number between 13 and 150"
+          age: function(val) { return parseInt(val) >= 13 && parseInt(val) < 150 ? true : "ZOMG bad age"; }
         }
       };
       $('form').simpleValidation(options);
