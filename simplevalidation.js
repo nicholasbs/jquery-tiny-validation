@@ -46,10 +46,8 @@
         }
       }
 
-      if (options.validateOnBlur)
-        $(this).blur(validateField);
-      if (options.validateOnKeyUp)
-        $(this).keyup(validateField);
+      if (options.validateOnBlur) $(this).blur(validateField);
+      if (options.validateOnKeyUp) $(this).keyup(validateField);
     });
 
     return this;
