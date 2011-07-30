@@ -24,9 +24,9 @@
         numValidatedFields = 0;
     if (options.disableSubmit) $form.find(':submit').attr('disabled', 'true');
     $form.find('input, textarea').each(function() {
-      if (!$(this).attr('data-validate')) return;
+      if (!$(this).data('validate')) return;
       numValidatedFields++;
-      var validations = $(this).attr('data-validate').replace(/\s/g, '').split(',');
+      var validations = $(this).data('validate').replace(/\s/g, '').split(',');
 
       var validateField = function() {
         var val = $(this).val();
