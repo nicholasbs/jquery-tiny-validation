@@ -57,11 +57,17 @@
               $form.find(':submit').attr('disabled', 'true');
             }
           }
-        }
+        };
 
         if (options.validateOnBlur) $(this).blur(validateField);
         if (options.validateOnKeyUp) $(this).keyup(validateField);
+
+        if ($form.data("validate-on-load") === true) {
+          validateField.call(this);
+        }
       });
+
+
     });
 
     return this;
