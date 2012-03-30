@@ -31,6 +31,9 @@ The following options can be passed to `tinyValidation` in an optional hash:
   * `onValid`. Function called after a field has been validated successfully. The function will be passed the form element that was validated.
   * `validators`. A hash in which the keys are the names of validation functions, and the values are functions that accept an input value and return true if the validation succeeds, and false (or an error message) if the validation fails.
 
+Additionally, if the form has a `data-validate-on-load` HTML attribute with the
+value `true`, the form will be validated on page load.
+
 ##Custom validation functions
 
 In addition to the `notEmpty` and `email` validation functions provided by default, you can define your own. The following example checks if a field follows the standard format for a US zip code (e.g., 12345 or 12345-1234).
