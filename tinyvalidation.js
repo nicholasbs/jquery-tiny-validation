@@ -20,46 +20,50 @@
     };
     options = $.extend(true, defaultOptions, options);
 
-    var $form = this,
-        numValidatedFields = 0;
-    if (options.disableSubmit) $form.find(':submit').attr('disabled', 'true');
-    $form.find('input, textarea').each(function() {
-      if (!$(this).data('validate')) return;
-      numValidatedFields++;
-      var validations = $(this).data('validate').replace(/\s/g, '').split(',');
+    this.each(function() {
+      var $form = $(this),
+          numValidatedFields = 0;
+      if (options.disableSubmit) $form.find(':submit').attr('disabled', 'true');
+      $form.find('input, textarea').each(function() {
+        if (!$(this).data('validate')) return;
+        numValidatedFields++;
+        var validations = $(this).data('validate').replace(/\s/g, '').split(',');
 
-      var validateField = function() {
-        var val = $(this).val();
-        var errors = [];
-        for (var i=0; i < validations.length; i++) {
-          var validation = validations[i];
-          var res = options.validators[validation](val);
-          if (res == false || typeof res === 'string') { // Error or error message returned
-            errors.push(res || "This field has an error");
+        var validateField = function() {
+          var val = $(this).val();
+          var errors = [];
+          for (var i=0; i < validations.length; i++) {
+            var validation = validations[i];
+            var res = options.validators[validation](val);
+            if (res == false || typeof res === 'string') { // Error or error message returned
+              errors.push(res || "This field has an error");
+            }
           }
-        }
 
-        if (errors.length > 0) {
-          $(this).addClass(options.errorClass);
-          $(this).removeClass(options.validClass);
-          if (typeof options.onError === 'function') options.onError.call(this, errors);
-        } else {
-          $(this).addClass(options.validClass);
-          $(this).removeClass(options.errorClass);
-          if (typeof options.onValid === 'function') options.onValid.call(this);
-        }
-
-        if (options.disableSubmit) {
-          if ($form.find("." + options.validClass).length == numValidatedFields) {
-            $form.find(':submit').removeAttr('disabled');
+          if (errors.length > 0) {
+            $(this).addClass(options.errorClass);
+            $(this).removeClass(options.validClass);
+            if (typeof options.onError === 'function') options.onError.call(this, errors);
           } else {
-            $form.find(':submit').attr('disabled', 'true');
+            $(this).addClass(options.validClass);
+            $(this).removeClass(options.errorClass);
+            if (typeof options.onValid === 'function') options.onValid.call(this);
+          }
+
+          if (options.disableSubmit) {
+            console.log($form.find("." + options.validClass).length);
+            console.log(numValidatedFields);
+            if ($form.find("." + options.validClass).length == numValidatedFields) {
+              $form.find(':submit').removeAttr('disabled');
+            } else {
+              $form.find(':submit').attr('disabled', 'true');
+            }
           }
         }
-      }
 
-      if (options.validateOnBlur) $(this).blur(validateField);
-      if (options.validateOnKeyUp) $(this).keyup(validateField);
+        if (options.validateOnBlur) $(this).blur(validateField);
+        if (options.validateOnKeyUp) $(this).keyup(validateField);
+      });
     });
 
     return this;
