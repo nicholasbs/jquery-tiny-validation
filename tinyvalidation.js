@@ -51,8 +51,6 @@
           }
 
           if (options.disableSubmit) {
-            console.log($form.find("." + options.validClass).length);
-            console.log(numValidatedFields);
             if ($form.find("." + options.validClass).length == numValidatedFields) {
               $form.find(':submit').removeAttr('disabled');
             } else {
