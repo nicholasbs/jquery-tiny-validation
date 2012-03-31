@@ -15,6 +15,10 @@
         },
         notEmpty: function(val) {
           return val != "" ? true : "This field is required";
+        },
+        matchesOtherField: function(val) {
+          var $otherEl = $($(this).data('match-field-selector'));
+          return val === $otherEl.val();
         }
       }
     };
@@ -34,7 +38,7 @@
           var errors = [];
           for (var i=0; i < validations.length; i++) {
             var validation = validations[i];
-            var res = options.validators[validation](val);
+            var res = options.validators[validation].call(this, val);
             if (res == false || typeof res === 'string') { // Error or error message returned
               errors.push(res || "This field has an error");
             }
