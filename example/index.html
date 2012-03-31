@@ -60,6 +60,10 @@
         <input type="text" id="email" data-validate="email, notEmpty" />
       </li>
       <li>
+        <label for="email_confirmation">Confirm email</label>
+        <input type="text" id="email_email" data-validate="email, notEmpty, matchesOtherField" data-match-field-selector="#email" />
+      </li>
+      <li>
         <label for="bio">Bio</label>
         <textarea id="bio" data-validate="notEmpty"></textarea>
       </li>
