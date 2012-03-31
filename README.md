@@ -1,6 +1,6 @@
 #About
 
-**TinyValidation** is a jQuery plugin for simple form validation. It validates fields using built-in validators (`notEmpty`, `email`) and/or custom validation functions. You specify which form elements to validate through a `data-validate` HTML attribute, which is a comma-separated list of validators to run for that element.
+**TinyValidation** is a jQuery plugin for simple form validation. It validates fields using built-in validators (`notEmpty`, `email`, `matchesOtherField`) and/or custom validation functions. You specify which form elements to validate through a `data-validate` HTML attribute, which is a comma-separated list of validators to run for that element. The `matchesOtherField` validator checks that the value passed matches the value of another element. The other element is determined via a selector specified via the `data-match-field-selector`. This is useful when implementing confirmation fields, e.g., password confirmations.
 
 ##Example
 
@@ -31,12 +31,11 @@ The following options can be passed to `tinyValidation` in an optional hash:
   * `onValid`. Function called after a field has been validated successfully. The function will be passed the form element that was validated.
   * `validators`. A hash in which the keys are the names of validation functions, and the values are functions that accept an input value and return true if the validation succeeds, and false (or an error message) if the validation fails.
 
-Additionally, if the form has a `data-validate-on-load` HTML attribute with the
-value `true`, the form will be validated on page load.
+Additionally, if the form has a `data-validate-on-load` HTML attribute with the value `true`, the form will be validated on page load.
 
 ##Custom validation functions
 
-In addition to the `notEmpty` and `email` validation functions provided by default, you can define your own. The following example checks if a field follows the standard format for a US zip code (e.g., 12345 or 12345-1234).
+In addition to the `notEmpty`, `email` and `matchesOtherField` validation functions provided by default, you can define your own. The following example checks if a field follows the standard format for a US zip code (e.g., 12345 or 12345-1234).
 
     $('#form1').tinyValidation({
       validators: {
@@ -45,7 +44,7 @@ In addition to the `notEmpty` and `email` validation functions provided by defau
           return re.test(zip) ? true : "Invalid zip code (ex. 12345 or 12345-1234)";
     }}});
 
-This function will be called for any input fields with `zipCode` in its `data-validate` HTML attribute.
+This function will be called for any input fields with `zipCode` in its `data-validate` HTML attribute. The validator is passed the value to be validated. The context (i.e., `this`) in the validator function is the HTML element being validated.
 
 ##License
 
