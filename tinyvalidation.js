@@ -1,5 +1,5 @@
-(function($) {
-  $.fn.tinyValidation = function(options) {
+(function ($) {
+  $.fn.tinyValidation = function (options) {
     var defaultOptions = {
       immediateValidation: false,
       disableSubmit: true,
@@ -10,14 +10,14 @@
       onValid: null, // function called when field is valid
       onError: null, // function called when field has error
       validators: {
-        email: function(email) {
+        email: function (email) {
           var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
           return email.match(re) ? true : "Please enter a valid email";
         },
-        notEmpty: function(val) {
+        notEmpty: function (val) {
           return val != "" ? true : "This field is required";
         },
-        matchesOtherField: function(val) {
+        matchesOtherField: function (val) {
           var $otherEl = $($(this).data('match-field-selector'));
           return val === $otherEl.val();
         }
@@ -25,17 +25,17 @@
     };
     options = $.extend(true, defaultOptions, options);
 
-    this.each(function() {
+    this.each(function () {
       var $form = $(this),
           numValidatedFields = 0;
       if (options.disableSubmit) $form.find(':submit').attr('disabled', 'true');
-      $form.find('input, textarea').each(function() {
+      $form.find('input, textarea').each(function () {
         if (!$(this).data('validate')) return;
         numValidatedFields++;
         var validations = $(this).data('validate').replace(/\s/g, '').split(',');
         var showErrors = options.immediateValidation;
 
-        var validateField = function() {
+        var validateField = function () {
           var val = $(this).val();
           var errors = [];
           for (var i=0; i < validations.length; i++) {
@@ -66,7 +66,7 @@
           }
         };
 
-        if (!options.immediateValidation) $(this).blur(function() { showErrors = true; });
+        if (!options.immediateValidation) $(this).blur(function () { showErrors = true; });
         if (options.validateOnBlur) $(this).blur(validateField);
         if (options.validateOnKeyUp) $(this).keyup(validateField);
 
