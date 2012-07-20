@@ -1,6 +1,6 @@
 #About
 
-**TinyValidation** is a jQuery plugin for simple form validation. It validates fields using built-in validators (`notEmpty`, `email`, `matchesOtherField`) and/or custom validation functions. You specify which form elements to validate through a `data-validate` HTML attribute, which is a comma-separated list of validators to run for that element. The `matchesOtherField` validator checks that the value passed matches the value of another element. The other element is determined via a selector specified via the `data-match-field-selector`. This is useful when implementing confirmation fields, e.g., password confirmations.
+**TinyValidation** is a jQuery plugin for simple form validation. It validates fields using built-in validators (`notEmpty`, `email`, `matchesOtherField`) and/or custom validation functions. You specify which form elements to validate through a `data-validate` HTML attribute, which is a comma- or space-separated list of validators to run for that element. The `matchesOtherField` validator checks that the value passed matches the value of another element. The other element is determined via a selector specified via the `data-match-field-selector`. This is useful when implementing confirmation fields, e.g., password confirmations.
 
 ##Example
 

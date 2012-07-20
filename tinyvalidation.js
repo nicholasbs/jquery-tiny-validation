@@ -35,7 +35,7 @@
         if (!$(this).data('validate')) return;
         numValidatedFields++;
 
-        var validations = $(this).data('validate').replace(/\s/g, '').split(','),
+        var validations = $(this).data('validate').split(/\s*,\s*|\s+/),
             showErrors = options.immediateValidation;
 
         var validateField = function () {
