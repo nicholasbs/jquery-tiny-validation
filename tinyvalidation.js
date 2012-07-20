@@ -32,16 +32,21 @@
       $form.find('input, textarea').each(function () {
         if (!$(this).data('validate')) return;
         numValidatedFields++;
-        var validations = $(this).data('validate').replace(/\s/g, '').split(',');
-        var showErrors = options.immediateValidation;
+        var validations = $(this).data('validate').replace(/\s/g, '').split(','),
+            showErrors = options.immediateValidation;
 
         var validateField = function () {
-          var val = $(this).val();
-          var errors = [];
-          for (var i=0; i < validations.length; i++) {
-            var validation = validations[i];
-            var res = options.validators[validation].call(this, val);
-            if (res == false || typeof res === 'string') { // Error or error message returned
+          var val = $(this).val(),
+              errors = [],
+              i,
+              validation,
+              res;
+
+          for (i=0; i < validations.length; i++) {
+            validation = validations[i];
+            res = options.validators[validation].call(this, val);
+            if (res == false || typeof res === 'string') {
+              // Error or error message returned
               errors.push(res || "This field has an error");
             }
           }
