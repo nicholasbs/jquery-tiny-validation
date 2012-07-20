@@ -40,7 +40,7 @@ In addition to the `notEmpty`, `email` and `matchesOtherField` validation functi
     $('#form1').tinyValidation({
       validators: {
         zipCode: function(zip) {
-          var re = /^\d\d\d\d\d(-?\d\d\d\d)?$/;
+          var re = /^\d{5}(-?\d{4})?$/;
           return re.test(zip) ? true : "Invalid zip code (ex. 12345 or 12345-1234)";
     }}});
 
