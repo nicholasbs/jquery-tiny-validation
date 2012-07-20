@@ -28,10 +28,13 @@
     this.each(function () {
       var $form = $(this),
           numValidatedFields = 0;
+
       if (options.disableSubmit) $form.find(':submit').attr('disabled', 'true');
+
       $form.find('input, textarea').each(function () {
         if (!$(this).data('validate')) return;
         numValidatedFields++;
+
         var validations = $(this).data('validate').replace(/\s/g, '').split(','),
             showErrors = options.immediateValidation;
 
