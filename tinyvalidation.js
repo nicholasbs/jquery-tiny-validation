@@ -1,6 +1,7 @@
 (function($) {
   $.fn.tinyValidation = function(options) {
     var defaultOptions = {
+      immediateValidation: false,
       disableSubmit: true,
       validateOnBlur: true,
       validateOnKeyUp: false,
@@ -32,6 +33,7 @@
         if (!$(this).data('validate')) return;
         numValidatedFields++;
         var validations = $(this).data('validate').replace(/\s/g, '').split(',');
+        var showErrors = options.immediateValidation;
 
         var validateField = function() {
           var val = $(this).val();
@@ -44,11 +46,12 @@
             }
           }
 
-          if (errors.length > 0) {
+          if (errors.length > 0 && showErrors) {
             $(this).addClass(options.errorClass);
             $(this).removeClass(options.validClass);
             if (typeof options.onError === 'function') options.onError.call(this, errors);
-          } else {
+          } else if (errors.length === 0) {
+            showErrors = true;
             $(this).addClass(options.validClass);
             $(this).removeClass(options.errorClass);
             if (typeof options.onValid === 'function') options.onValid.call(this);
@@ -63,6 +66,7 @@
           }
         };
 
+        if (!options.immediateValidation) $(this).blur(function() { showErrors = true; });
         if (options.validateOnBlur) $(this).blur(validateField);
         if (options.validateOnKeyUp) $(this).keyup(validateField);
 
