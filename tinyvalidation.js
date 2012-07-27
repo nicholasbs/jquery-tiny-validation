@@ -77,6 +77,10 @@
         if (!options.immediateValidation) $(this).blur(function () { showErrors = true; });
         if (options.validateOnBlur) $(this).blur(validateField);
         if (options.validateOnKeyUp) $(this).keyup(validateField);
+        if (options.disableSubmit) {
+          $(this).bind('input', validateField);
+          $(this).trigger('input');
+        }
 
         if ($form.data("validate-on-load") === true) {
           validateField.call(this);
