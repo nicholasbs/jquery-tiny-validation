@@ -36,14 +36,22 @@
         numValidatedFields++;
 
         var validations = $(this).data('validate').split(/\s*,\s*|\s+/),
-            showErrors = options.immediateValidation;
+            dirty = false,
+            hasBeenBlurredWhileDirty = options.immediateValidation;
 
-        var validateField = function () {
+        var validateField = function (e) {
           var val = $(this).val(),
               errors = [],
               i,
               validation,
               res;
+
+          // True iff user has typed in this field, ignoring tab (9) and shift
+          // (16) key presses
+          if (e.type === "keyup" && e.which !== 9 && e.which !== 16) dirty = true;
+
+          // True iff user has blurred this field after it was typed in
+          if (e.type === "blur" && dirty) hasBeenBlurredWhileDirty = true;
 
           for (i=0; i < validations.length; i++) {
             validation = validations[i];
@@ -54,12 +62,11 @@
             }
           }
 
-          if (errors.length > 0 && showErrors) {
+          if (errors.length > 0 && hasBeenBlurredWhileDirty) {
             $(this).addClass(options.errorClass);
             $(this).removeClass(options.validClass);
             if (typeof options.onError === 'function') options.onError.call(this, errors);
           } else if (errors.length === 0) {
-            showErrors = true;
             $(this).addClass(options.validClass);
             $(this).removeClass(options.errorClass);
             if (typeof options.onValid === 'function') options.onValid.call(this);
@@ -74,7 +81,6 @@
           }
         };
 
-        if (!options.immediateValidation) $(this).blur(function () { showErrors = true; });
         if (options.validateOnBlur) $(this).blur(validateField);
         if (options.validateOnKeyUp) $(this).keyup(validateField);
         if (options.disableSubmit) {

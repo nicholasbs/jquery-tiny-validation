@@ -30,7 +30,7 @@ The following options can be passed to `tinyValidation` in an optional hash:
   * `onError`. Function called after a field has failed validation. The first argument passed to the function is the form element, and the second is an array of error messages (as strings). Default: `null`.
   * `onValid`. Function called after a field has been validated successfully. The function will be passed the form element that was validated.
   * `validators`. A hash in which the keys are the names of validation functions, and the values are functions that accept an input value and return true if the validation succeeds, and false (or an error message) if the validation fails.
-  * `immediateValidation`. When false, errors don't run (i.e., classes aren't added and `onError` callbacks aren't called) until after the field has lost focus once or the field has validated successfully. This solves the problem of, e.g., tabbing into an email field and immediately getting an "invalid email" error. When true, errors run on the first keyup or blur event, depending on the settings above. Default `false`.
+  * `immediateValidation`. When false, errors don't run (i.e., classes aren't added and `onError` callbacks aren't called) until after the field has lost focus once after the user has typed in it or the field has validated successfully. This solves the problem of, e.g., tabbing into an email field and immediately getting an "invalid email" error. When true, errors run on the first keyup or blur event, depending on the settings above. Default `false`.
 
 Additionally, if the form has a `data-validate-on-load` HTML attribute with the value `true`, the form will be validated on page load.
 
