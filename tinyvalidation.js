@@ -83,6 +83,7 @@
 
         if (options.validateOnBlur) $(this).blur(validateField);
         if (options.validateOnKeyUp) $(this).keyup(validateField);
+        if ($(this).is(':checkbox')) $(this).change(validateField);
         if (options.disableSubmit) {
           $(this).bind('input', validateField);
           $(this).trigger('input');
