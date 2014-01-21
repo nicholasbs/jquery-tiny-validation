@@ -80,10 +80,23 @@
             }
           }
         };
+        var validateAllFieldsWithName = function (e) {
+          var $others = $form.find('input[name="'+$(this).attr('name')+'"]');
+          $others.each(function () {
+            if (!$(this).data('validate')) return;
+            $(this).trigger({
+              type: "tv-radioPropagate"
+            });
+          });
+        };
 
         if (options.validateOnBlur) $(this).blur(validateField);
         if (options.validateOnKeyUp) $(this).keyup(validateField);
         if ($(this).is(':checkbox')) $(this).change(validateField);
+        if ($(this).is(':radio')) {
+          $(this).change(validateAllFieldsWithName);
+          $(this).bind('tv-radioPropagate', validateField);
+        }
         if (options.disableSubmit) {
           $(this).bind('input', validateField);
           $(this).trigger('input');

@@ -16,6 +16,9 @@
           zipCode: function(zip) {
             var re = /^\d{5}(-?\d{4})?$/;
             return re.test(zip) ? true : "Invalid zip code (ex. 12345 or 12345-1234)";
+          },
+          oneChecked: function(check) {
+            return $(this).closest('form').find('input[name="'+$(this).attr('name')+'"]:checked').length === 1;
           }
         }
       };
@@ -33,6 +36,10 @@
 
     input {
       margin-bottom: 16px;
+    }
+
+    input[type="radio"] {
+      display: inline;
     }
 
     ol {
@@ -71,6 +78,11 @@
       <li>
         <label for="zip">Zip</label>
         <input type="text" id="zip" data-validate="zipCode" />
+      </li>
+      <li>
+        <label for="address">Address</label>
+        <input type="radio" name="address" value="home" data-validate="oneChecked">Home
+        <input type="radio" name="address" value="work" data-validate="oneChecked">Work
       </li>
       <li>
         <input type="submit" />
