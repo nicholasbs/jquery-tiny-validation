@@ -81,8 +81,8 @@
           }
         };
         var validateAllFieldsWithName = function (e) {
-          var $others = $form.find('input[name="'+$(this).attr('name')+'"]');
-          $others.each(function () {
+          var $radios = $form.find('input[name="'+$(this).attr('name')+'"]');
+          $radios.each(function () {
             if (!$(this).data('validate')) return;
             $(this).trigger({
               type: "tv-radioPropagate"
