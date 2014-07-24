@@ -29,7 +29,7 @@
       var $form = $(this),
           numValidatedFields = 0;
 
-      if (options.disableSubmit) $form.find(':submit').attr('disabled', 'true');
+      if (options.disableSubmit) $form.find(':submit').prop('disabled', true);
 
       $form.find('input, textarea').each(function () {
         if (!$(this).data('validate')) return;
@@ -74,9 +74,9 @@
 
           if (options.disableSubmit) {
             if ($form.find("." + options.validClass).length == numValidatedFields) {
-              $form.find(':submit').removeAttr('disabled');
+              $form.find(':submit').prop('disabled', false);
             } else {
-              $form.find(':submit').attr('disabled', 'true');
+              $form.find(':submit').prop('disabled', true);
             }
           }
         };
